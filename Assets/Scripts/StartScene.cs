@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class StartScene : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class StartScene : MonoBehaviour
     void Start()
     {
         Globals.GameScore = 0;
+        (GameObject.Find("SoundToggle").GetComponent<Toggle>()).isOn = SettingsManager.Sound;
     }
 
     // Update is called once per frame
@@ -17,25 +19,22 @@ public class StartScene : MonoBehaviour
             Application.Quit();
     }
 
-    void OnGUI()
+    public void GoToGameScene()
     {
-        Helpers.AutoResize(Globals.Width, Globals.Height);
-        
-        GUILayout.BeginArea(new Rect(10, 30, Globals.Width - 20, Globals.Height));
-        GUILayout.Box("Bubble Breaker");
-
-
-        if (GUILayout.Button("Start Game"))
-            Application.LoadLevel("bubbleBreakerGameScene");
-
-        if (GUILayout.Button("High scores"))
-            Application.LoadLevel("highScoresScene");
-
-        SettingsManager.Sound = GUILayout.Toggle(SettingsManager.Sound, "Sound");
-        
-
-        GUILayout.EndArea();
+        Application.LoadLevel("bubbleBreakerGameScene");
     }
+
+    public void GoToHighScoreScene()
+    {
+        Application.LoadLevel("highScoresScene");
+    }
+
+    public void SetSound(bool value)
+    {
+        SettingsManager.Sound = value;
+    }
+
+   
 
 
 }

@@ -12,7 +12,7 @@ public class BackgroundChangeRandomColor : MonoBehaviour
         //set a random color
         newColor = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1);
         //cache the current color
-        oldColor = renderer.material.color;
+        oldColor = GetComponent<Renderer>().material.color;
     }
 
     // Update is called once per frame
@@ -21,11 +21,11 @@ public class BackgroundChangeRandomColor : MonoBehaviour
 
         tLerp += Time.deltaTime * rate; //speed
         Color color = Color.Lerp(oldColor, newColor, tLerp);
-        renderer.material.color = color;
+        GetComponent<Renderer>().material.color = color;
         
         if (tLerp >= 1)//we reached the random color, so create a new one and reset the lerp variable
         {
-            oldColor = renderer.material.color;
+            oldColor = GetComponent<Renderer>().material.color;
             newColor = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1);
             tLerp = 0;
         }
